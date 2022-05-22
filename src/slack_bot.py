@@ -4,7 +4,7 @@ import requests
 class SlackBot:
     def __init__(self, name) -> None:
         self.name = name
-        token_dir = './data/token/' + name + '.txt'
+        token_dir = './token/' + name + '.txt'
         with open(token_dir) as f:
             self.token = f.readline().strip()
         self.channel = '#alert'

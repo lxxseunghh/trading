@@ -21,7 +21,7 @@ class Exchange:
         self.update_balance()
 
     def set_binance(self) -> None:
-        with open('./data/key.txt') as f:
+        with open('./token/key.txt') as f:
             api_key = f.readline().strip()
             secret = f.readline().strip()
         self.binance = ccxt.binance(config={
