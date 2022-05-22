@@ -13,7 +13,7 @@ if __name__ == '__main__':
     posted_message = False
     # set target
     exchange.update_target()
-    #alerter.post_message(exchange)
+    alerter.post_message(exchange)
     # repeat for every seconds
     while True:
         try:
