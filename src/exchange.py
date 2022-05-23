@@ -89,6 +89,7 @@ class Exchange:
             self.position_amount = 0
 
     def __str__(self) -> str:
+        self.update_balance()
         text = '###### Current  Info #####\n' + \
             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n' + \
             'symbol: {}\n'.format(self.symbol) + \
