@@ -1,4 +1,5 @@
 # .gitignore
 venv/
 src/__pycache__
-/test.py
+src/test.py
+token/
