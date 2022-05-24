@@ -8,8 +8,8 @@ from slack_bot import SlackBot
 if __name__ == '__main__':
     exchange = Exchange()
     alerter = SlackBot('alerter')
-    base_time = [datetime.time(hour=8, minute=59),
-        datetime.time(hour=9), datetime.time(hour=9, minute=1)]
+    base_time = [datetime.time(hour=9),
+        datetime.time(hour=9, minute=1), datetime.time(hour=9, minute=2)]
     operation = False
     posted_message = False
     # set target
@@ -20,11 +20,11 @@ if __name__ == '__main__':
         try:
             now = datetime.datetime.now()
             # at AM 08:59
-            if operation and (base_time[0] < now.time() < base_time[1]):
+            if operation and (base_time[0] <= now.time() < base_time[1]):
                 exchange.clear_position()
                 operation = False
             # at AM 09:00
-            if not operation and (base_time[1] < now.time() < base_time[2]):
+            if not operation and (base_time[1] <= now.time() < base_time[2]):
                 exchange.update_target()
                 operation = True
             # try entering position every second

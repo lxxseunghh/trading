@@ -13,7 +13,7 @@ class Exchange:
         self.position_amount = 0
         self.target_price = [0, 0]
         self.k = 0.5
-        self.portion = 0.1
+        self.portion = 0.25
 
         self.set_binance()
         self.set_leverage(self.leverage)
@@ -47,9 +47,9 @@ class Exchange:
             timeframe='1d',
             since=None,
             limit=10)
-        volatility = (ohlcv[-2][2] - ohlcv[-2][3]) * self.k
-        long_target = ohlcv[-1][1] + volatility
-        short_target = ohlcv[-1][1] - volatility
+        distance = (ohlcv[-2][2] - ohlcv[-2][3]) * self.k
+        long_target = ohlcv[-1][1] + distance
+        short_target = ohlcv[-1][1] - distance
         self.target_price = [long_target, short_target]
 
     def update_balance(self) -> None:
