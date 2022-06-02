@@ -8,12 +8,12 @@ class Exchange:
         self.binance = None
         self.symbol = 'ETH/USDT'
         self.balance = 0
-        self.leverage = 5
+        self.leverage = 1
         self.position_type = None
         self.position_amount = 0
         self.target_price = [0, 0]
-        self.k = 0.5
-        self.portion = 0.25
+        self.k = 0.356
+        self.portion = 0.99
 
         self.set_binance()
         self.set_leverage(self.leverage)
@@ -90,8 +90,7 @@ class Exchange:
 
     def __str__(self) -> str:
         self.update_balance()
-        text = '###### Current  Info #####\n' + \
-            datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n' + \
+        text = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n' + \
             'symbol: {}\n'.format(self.symbol) + \
             'balance: {}\n'.format(self.balance) + \
             'leverage: {}\n'.format(self.leverage) + \
