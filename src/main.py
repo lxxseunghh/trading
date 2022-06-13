@@ -30,6 +30,9 @@ if __name__ == '__main__':
                 alerter.post_message('Updated target price')
                 alerter.post_message(exchange)
                 operation = True
+                # write log
+                with open('./log/' + exchange.symbol.split('/')[0] + '.txt', 'a') as f:
+                    f.write(exchange.log() + '\n')
             # try entering position every second
             if operation and exchange.position_type is None:
                 if exchange.enter_position():
@@ -40,6 +43,6 @@ if __name__ == '__main__':
             traceback.print_exc()
             alerter.post_message('# error\n' + str(e))
         # sleep 1 second
-        print('*', now.strftime('%Y-%m-%d %H:%M:%S'))
+        print(exchange.log())
         sleep_time = (1000000 - now.microsecond) / 1000000
         time.sleep(sleep_time)

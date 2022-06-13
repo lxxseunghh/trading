@@ -20,6 +20,11 @@ class Exchange:
         self.update_target()
         self.update_balance()
 
+        self.RoR = 1
+        self.MDD = 0
+        self.init_balance = self.balance
+        self.max_balance = self.balance
+
     def set_binance(self) -> None:
         with open('./token/key.txt') as f:
             api_key = f.readline().strip()
@@ -99,4 +104,13 @@ class Exchange:
             'price_long: {}\n'.format(self.target_price[0]) + \
             'price_curr: {}\n'.format(self.get_cur_price()) + \
             'price_shrt: {}'.format(self.target_price[1])
+        return text
+    
+    def log(self) -> str:
+        self.update_balance()
+        self.max_balance = max(self.max_balance, self.balance)
+        self.RoR = self.balance / self.init_balance
+        self.MDD = min(self.MDD, (self.balance - self.max_balance) / self.max_balance)
+        text = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S ') + \
+            '{0:0.6f} {1:0.4f} {2:.4f}'.format(self.balance, self.RoR, self.MDD)
         return text
