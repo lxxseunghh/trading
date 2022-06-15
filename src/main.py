@@ -16,6 +16,9 @@ if __name__ == '__main__':
     exchange.update_target()
     alerter.post_message('Start trading')
     alerter.post_message(exchange)
+    # write log
+    with open('./log/' + exchange.symbol.split('/')[0] + '.txt', 'a') as f:
+        f.write(exchange.log() + '\n')
     # repeat for every seconds
     while True:
         try:
