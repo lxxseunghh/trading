@@ -41,11 +41,12 @@ if __name__ == '__main__':
                 if exchange.enter_position():
                     alerter.post_message('Entered a new position')
                     alerter.post_message(exchange)
+            # print log every second
+            print(exchange.log())
         # exception handling
         except Exception as e:
             traceback.print_exc()
             alerter.post_message('# error\n' + str(e))
         # sleep 1 second
-        print(exchange.log())
         sleep_time = (1000000 - now.microsecond) / 1000000
         time.sleep(sleep_time)
